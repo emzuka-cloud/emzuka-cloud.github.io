@@ -163,22 +163,17 @@ a:hover { text-decoration-color: var(--ink); }
     text-wrap: balance;
 }
 
+/* entrance: name words rise out of a blur one after another, role follows */
+.name .w { display: inline-block; animation: rise .9s cubic-bezier(.2, .7, .2, 1) calc(var(--i) * 110ms) both; }
+.role { animation: rise .9s cubic-bezier(.2, .7, .2, 1) .4s both; }
+@keyframes rise { from { opacity: 0; transform: translateY(.4em); filter: blur(8px); } }
+
 .role {
     font-size: clamp(1.125rem, 1.8vw, 1.375rem);
     line-height: 1.35;
     color: var(--ink-2);
     max-width: 44ch;
     text-wrap: balance;
-}
-
-.dots {
-    grid-column: 9 / -1;
-    grid-row: 1;
-    align-self: end;
-    height: min(200px, 40%);
-    margin-bottom: 32px;
-    background: radial-gradient(circle, var(--ink-2) 0.8px, transparent 1.2px) 0 0 / 8px 8px;
-    opacity: .45;
 }
 
 .seal {
@@ -415,7 +410,6 @@ p { color: var(--ink-2); }
     .plate, .row { grid-template-columns: minmax(0, 1fr); }
     .credits > *, .plate > * { min-width: 0; }
     .plate-body { grid-column: 1 / -1; padding: 72px 0 48px; }
-    .dots { display: none; }
     .seal { --seal-w: 116px; right: -8px; }
     .credits, .colophon .credits { grid-template-columns: 1fr; }
     .credit + .credit { border-left: 0; padding-left: 0; border-top: 1px solid var(--hairline); }
@@ -425,7 +419,7 @@ p { color: var(--ink-2); }
 
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .seal-ring { animation: none; }
+    .seal-ring, .name .w, .role { animation: none; }
     * { transition: none !important; }
 }
 
@@ -434,7 +428,7 @@ p { color: var(--ink-2); }
     @page { size: A4; margin: 14mm 14mm 16mm; }
     :root { --edge: 0px; --gutter: 16px; }
     body { background: #fff; font-size: 10pt; line-height: 1.45; overflow: visible; }
-    .bar, .skip, .dots, .colophon, .screen { display: none; }
+    .bar, .skip, .colophon, .screen { display: none; }
     /* ponytail: seal dropped in print, its SVG text would pollute ATS text extraction */
     .seal { display: none; }
     .cross { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
